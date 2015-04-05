@@ -1,0 +1,29 @@
+@(images: List[model.Image])
+
+@import helper._
+
+@main("IoT APPLICATION MARKETPLACE") {
+    
+	 <table cellspacing='0' align="left">
+      <thead><th>Id</th><th>Name</th><th>Application Start Command</th><th>Run App</th></thead>
+      <tbody>
+      @for((image, index) <- images.zipWithIndex) {
+                    @if(index % 2 == 0){
+                    		<tr class="even">
+                    } else {
+								<tr>      	
+      				  }
+                          <td>@image.id</td>
+                          <td>@image.name</td>
+                          <td>@image.dockerRunCommand</td>
+                          <td>
+                            @form(routes.Images.runcmd(image.dockerRunCommand)) {
+                            <input type=submit value="Run App" style="width:100%">
+                            }
+                          </td>
+        				      </tr>
+      }
+      </tbody>
+    </table>
+
+}
