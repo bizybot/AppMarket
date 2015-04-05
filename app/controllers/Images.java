@@ -1,6 +1,7 @@
 package controllers;
 
 import model.Image;
+import utils.Utils;
 
 import com.fasterxml.jackson.databind.JsonNode;
 
@@ -26,8 +27,8 @@ public class Images extends Controller {
     public static Result index() {
       
       return ok(
-				images.render(fetchDummyImages())
-        		//images.render(fetchImages())
+			//	images.render(fetchDummyImages())
+        		images.render(fetchImages())
         );
     }
 
@@ -36,14 +37,23 @@ public class Images extends Controller {
      */
     public static Result runcmd(String dockerCommand) throws Exception {
       
-        Process process1 = Runtime.getRuntime().exec(new String[]{"touch","/tmp/runCommand"});
-        process1.waitFor();
-        process1.destroy();
+        //Process process1 = Runtime.getRuntime().exec(new String[]{"touch","/tmp/runCommand"});
+        //process1.waitFor();
+        //process1.destroy();
 
-        Process process = Runtime.getRuntime().exec(new String[]{"echo", dockerCommand, ">" , "/tmp/runCommand"});
-        //Process process = Runtime.getRuntime().exec(new String[]{dockerCommand});
-        process.waitFor();
-        process.destroy();
+	System.out.println(dockerCommand);
+
+        Object object = (Object)Utils.systemExecute(dockerCommand.split(" "));
+
+        System.out.println(object);
+        //Process process = Runtime.getRuntime().exec(new String[]{"echo", dockerCommand, ">" , "/tmp/runCommand"});
+//        Process process = Runtime.getRuntime().exec(dockerCommand.split(" "));
+//        int status = process.waitFor();
+//        if (status != 0)
+//		System.out.println("ERROR , "+status);
+//        else
+//		System.out.println("SUCC");
+//        process.destroy();
       
         return index();
     }
