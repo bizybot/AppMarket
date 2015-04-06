@@ -1,0 +1,24 @@
+@(containers: List[model.Container])
+
+@main("Running Container Applications") {
+
+	 <table cellspacing='0' align="left">
+      <thead><th>Id</th><th>Name</th><th>Image</th><th>Status</th></thead>
+      <tbody>
+      @for((container, index) <- containers.zipWithIndex) {
+                    @if(index % 2 == 0){
+                    		<tr class="even">
+                    } else {
+								<tr>      	
+      				  }
+                          <td>@container.id</td>
+                          <td>@container.name</td>
+                          <td>@container.image</td>
+                          <td>@container.status</td>
+        				      </tr>
+      }
+      <tr><td colspan="4"><a href="@routes.Images.index">Go to Marketplace</a></td></tr>
+      </tbody>
+    </table>
+
+}

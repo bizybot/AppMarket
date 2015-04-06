@@ -4,6 +4,7 @@
 
 # Home page
 GET     /                           controllers.Images.index()
+GET     /containers                           controllers.Containers.index()
 
 POST	  /runcmd							controllers.Images.runcmd(dockerCommand: String)
 
